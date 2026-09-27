@@ -1,0 +1,32 @@
+classDiagram
+    class Customer {
+        -String name
+        -List~Order~ purchaseHistory
+        +addOrder(order) void
+        +isVerifiedCustomer() boolean
+    }
+
+    class FoodItem {
+        -String name
+        -double price
+        -String category
+        -double popularityRating
+    }
+
+    class Menu {
+        -List~FoodItem~ items
+        +addItem(item) void
+        +filterByCategory(category) List~FoodItem~
+    }
+
+    class Order {
+        -List~FoodItem~ selectedItems
+        +addItem(item) void
+        +computeTotalCost() double
+    }
+
+    Customer "1" --> "0..*" Order : places
+    Menu "1" o-- "0..*" FoodItem : lists
+    Order "1" --> "1..*" FoodItem : contains
+
+    note for Customer "isVerifiedCustomer() checks tracked profile data (name, purchase history) only - no login or credential logic"
