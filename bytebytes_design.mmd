@@ -4,6 +4,7 @@ classDiagram
         -List~Order~ purchaseHistory
         +addOrder(order) void
         +isVerifiedCustomer() boolean
+        +totalSpent() double
     }
 
     class FoodItem {
@@ -17,12 +18,17 @@ classDiagram
         -List~FoodItem~ items
         +addItem(item) void
         +filterByCategory(category) List~FoodItem~
+        +filterByMinPopularity(minRating) List~FoodItem~
+        +filterByPriceRange(minPrice, maxPrice) List~FoodItem~
+        +sortByPrice(ascending) List~FoodItem~
+        +sortByPopularity(descending) List~FoodItem~
     }
 
     class Order {
         -List~FoodItem~ selectedItems
         +addItem(item) void
         +computeTotalCost() double
+        +itemCount() int
     }
 
     Customer "1" --> "0..*" Order : places
