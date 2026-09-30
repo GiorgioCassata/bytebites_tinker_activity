@@ -1,0 +1,27 @@
+classDiagram
+    class Customer {
+        -String name
+        -List~Order~ purchaseHistory
+        +verify() boolean
+    }
+
+    class FoodItem {
+        -String name
+        -double price
+        -String category
+        -double popularityRating
+    }
+
+    class Menu {
+        -List~FoodItem~ items
+        +filterByCategory(category) List~FoodItem~
+    }
+
+    class Order {
+        -List~FoodItem~ selectedItems
+        +computeTotalCost() double
+    }
+
+    Customer "1" --> "*" Order : places
+    Menu "1" --> "*" FoodItem : lists
+    Order "1" --> "*" FoodItem : contains
